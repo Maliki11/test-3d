@@ -10,6 +10,9 @@
 <script src="https://cdn.jsdelivr.net/npm/lucide@1/dist/umd/lucide.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
 <style>
+/* =====================================================
+   1) المتغيرات والأساسيات
+   ===================================================== */
 :root{
   --bg:#fefcf8; --card:#ffffff; --text:#1a2332; --muted:#64748b;
   --accent:#ea580c; --accent-soft:rgba(234,88,12,.10);
@@ -28,67 +31,137 @@ body{
     radial-gradient(ellipse 60% 40% at 10% 0%, rgba(22,163,74,.06), transparent);
 }
 .wrap{max-width:1280px;margin:0 auto;padding:0 20px}
+
+
+/* =====================================================
+   2) الواجهة العلوية
+   ===================================================== */
 .hero{padding:44px 0 28px;text-align:center}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--accent-soft);color:var(--accent);border:1px solid rgba(234,88,12,.25);padding:6px 16px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:16px}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent-soft);color:var(--accent);
+  border:1px solid rgba(234,88,12,.25);
+  padding:6px 16px;border-radius:999px;font-size:13px;font-weight:700;margin-bottom:16px;
+}
 .hero-badge svg{width:15px;height:15px}
-.hero h1{font-size:clamp(28px,4.5vw,44px);font-weight:900;letter-spacing:-.5px;background:linear-gradient(120deg,var(--accent) 0%,var(--accent3) 100%);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px}
+.hero h1{
+  font-size:clamp(28px,4.5vw,44px);font-weight:900;letter-spacing:-.5px;
+  background:linear-gradient(120deg,var(--accent) 0%,var(--accent3) 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:10px;
+}
 .hero p{color:var(--muted);font-size:16px;max-width:640px;margin:0 auto}
+
+
+/* =====================================================
+   3) التخطيط والبطاقات
+   ===================================================== */
 .layout{display:grid;grid-template-columns:400px 1fr;gap:24px;padding-bottom:40px;align-items:start}
 @media(max-width:980px){.layout{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:var(--shadow);padding:24px;margin-bottom:20px;transition:transform .25s ease, box-shadow .25s ease}
+.card{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  box-shadow:var(--shadow);padding:24px;margin-bottom:20px;
+  transition:transform .25s ease, box-shadow .25s ease;
+}
 .card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(15,23,42,.08),0 12px 32px rgba(15,23,42,.07)}
-.card-title{display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border)}
+.card-title{
+  display:flex;align-items:center;gap:10px;font-size:17px;font-weight:800;
+  margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);
+}
 .card-title svg{width:20px;height:20px;color:var(--accent)}
+
+
+/* =====================================================
+   4) حقول الإدخال
+   ===================================================== */
 .inputs-card{position:sticky;top:20px}
 @media(max-width:980px){.inputs-card{position:static}}
 .field{margin-bottom:16px}
 .field label{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:700;color:#334155;margin-bottom:7px}
 .field label svg{width:15px;height:15px;color:var(--muted)}
-.field input[type=number],.field select{width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:15px;font-family:inherit;color:var(--text);background:#fbfbf9;transition:border .2s, box-shadow .2s}
+.field input[type=number],.field select{
+  width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:10px;
+  font-size:15px;font-family:inherit;color:var(--text);background:#fbfbf9;
+  transition:border .2s, box-shadow .2s;
+}
 .field input:focus,.field select:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px var(--accent-soft);background:#fff}
 .unit{font-size:12px;color:var(--muted);font-weight:500}
+
+
+.grid-2col{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+
+
 .presets{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
-.preset-btn{flex:1;min-width:80px;padding:8px 6px;font-size:12px;font-weight:700;border:1.5px solid var(--border);border-radius:8px;background:#fff;color:var(--muted);cursor:pointer;font-family:inherit;transition:all .2s}
+.preset-btn{
+  flex:1;min-width:80px;padding:8px 6px;font-size:12px;font-weight:700;
+  border:1.5px solid var(--border);border-radius:8px;background:#fff;color:var(--muted);
+  cursor:pointer;font-family:inherit;transition:all .2s;
+}
 .preset-btn:hover{border-color:var(--accent);color:var(--accent)}
 .preset-btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-[10/27/2026 7:45 PM] مالك الشمري: .panel-opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
-.panel-opt{border:1.5px solid var(--border);border-radius:10px;padding:8px 2px;text-align:center;cursor:pointer;background:#fff;font-family:inherit;color:var(--text);transition:all .2s}
+
+
+/* اختيار قدرة اللوح */
+.panel-opts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.panel-opt{
+  border:1.5px solid var(--border);border-radius:10px;padding:8px 2px;text-align:center;
+  cursor:pointer;background:#fff;font-family:inherit;color:var(--text);transition:all .2s;
+}
 .panel-opt b{display:block;font-size:16px;font-weight:900}
 .panel-opt small{display:block;font-size:10.5px;color:var(--muted);font-weight:500}
 .panel-opt:hover{border-color:var(--accent)}
 .panel-opt.active{background:var(--accent);border-color:var(--accent);color:#fff}
 .panel-opt.active small{color:rgba(255,255,255,.85)}
-.panel-info{margin-top:10px;padding:10px 12px;background:var(--accent-soft);border-radius:10px;font-size:12.5px;color:#9a3412;font-weight:700;line-height:1.9}
+.panel-info{
+  margin-top:10px;padding:10px 12px;background:var(--accent-soft);border-radius:10px;
+  font-size:12.5px;color:#9a3412;font-weight:700;line-height:1.9;
+}
+
+
+/* خيارات نوع النظام */
 .seg{display:grid;grid-template-columns:1fr 1fr 1fr;gap:6px;background:#f1f0ec;padding:5px;border-radius:10px}
 .seg label{text-align:center;border-radius:7px;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer;transition:all .2s;margin:0;display:block}
 .seg input{display:none}
 .seg span{display:block;padding:9px 4px;border-radius:7px;transition:all .2s}
 .seg input:checked + span{background:#fff;color:var(--accent);box-shadow:0 1px 3px rgba(0,0,0,.1)}
-.auto-note{margin-top:18px;padding:12px;background:var(--accent-soft);border-radius:10px;font-size:12.5px;color:#9a3412;font-weight:500;display:flex;gap:8px;align-items:flex-start}
+
+
+.auto-note{
+  margin-top:18px;padding:12px;background:var(--accent-soft);border-radius:10px;
+  font-size:12.5px;color:#9a3412;font-weight:500;display:flex;gap:8px;align-items:flex-start;
+}
 .auto-note svg{width:16px;height:16px;flex-shrink:0;margin-top:2px}
+
+
+/* =====================================================
+   5) المؤشرات الرئيسية
+   ===================================================== */
 .kpi-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;margin-bottom:20px}
-.kpi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;position:relative;overflow:hidden;box-shadow:var(--shadow);transition:transform .25s}
+.kpi{
+  background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px 16px;
+  position:relative;overflow:hidden;box-shadow:var(--shadow);transition:transform .25s;
+}
 .kpi:hover{transform:translateY(-3px)}
 .kpi::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--accent);border-radius:0 4px 4px 0}
 .kpi.green::before{background:var(--accent2)}
 .kpi.blue::before{background:var(--accent3)}
 .kpi.warn::before{background:var(--warn)}
-.kpi.purple::before{background:#8b5cf6}
 .kpi-icon{width:38px;height:38px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:var(--accent-soft);color:var(--accent);margin-bottom:10px}
 .kpi.green .kpi-icon{background:var(--accent2-soft);color:var(--accent2)}
 .kpi.blue .kpi-icon{background:rgba(14,116,144,.10);color:var(--accent3)}
 .kpi.warn .kpi-icon{background:rgba(217,119,6,.12);color:var(--warn)}
-.kpi.purple .kpi-icon{background:rgba(139,92,246,.12);color:#8b5cf6}
 .kpi-icon svg{width:20px;height:20px}
 .kpi-label{font-size:12.5px;color:var(--muted);font-weight:700;margin-bottom:4px}
 .kpi-value{font-size:22px;font-weight:900;color:var(--text);line-height:1.2;font-variant-numeric:tabular-nums}
 .kpi-sub{font-size:11.5px;color:var(--muted);margin-top:3px}
+
+
+/* =====================================================
+   6) التفاصيل والرسوم
+   ===================================================== */
 .detail-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px dashed var(--border);font-size:14px}
 .detail-row:last-child{border-bottom:none}
 .detail-row .lbl{color:var(--muted);font-weight:500}
 .detail-row .val{font-weight:800;font-variant-numeric:tabular-nums}
-.detail-row .val.ok{color:var(--accent2)}
-.detail-row .val.bad{color:var(--bad)}
 .area-check{display:flex;align-items:center;gap:12px;margin-top:12px}
 .area-bar{flex:1;height:10px;background:#eee;border-radius:999px;overflow:hidden}
 .area-fill{height:100%;border-radius:999px;transition:width .5s ease, background .3s}
@@ -96,6 +169,11 @@ body{
 .charts-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:20px;margin-bottom:20px}
 @media(max-width:760px){.charts-grid{grid-template-columns:1fr}}
 .chart-box{width:100%;height:320px}
+
+
+/* =====================================================
+   7) التقييم + المحاكي + المقارنة + الافتراضات
+   ===================================================== */
 .verdict{padding:22px;border-radius:14px;text-align:center;border:2px solid;margin-bottom:20px}
 .verdict.excellent{background:var(--accent2-soft);border-color:var(--accent2);color:#15803d}
 .verdict.good{background:rgba(217,119,6,.10);border-color:var(--warn);color:#b45309}
@@ -103,23 +181,38 @@ body{
 .verdict h3{font-size:20px;font-weight:900;margin-bottom:6px;display:flex;align-items:center;justify-content:center;gap:8px}
 .verdict h3 svg{width:24px;height:24px}
 .verdict p{font-size:14px;font-weight:500;opacity:.9}
-.sim-card{text-align:center;padding:26px 20px;margin-bottom:20px;border-radius:16px;background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid #4CAF50}
+
+
+.sim-card{
+  text-align:center;padding:26px 20px;margin-bottom:20px;border-radius:16px;
+  background:linear-gradient(135deg,#e8f5e9,#c8e6c9);border:2px solid #4CAF50;
+}
 .sim-card h3{color:#2e7d32;font-size:18px;font-weight:900;margin-bottom:6px}
 .sim-card p{color:#388E3C;font-size:14px;margin-bottom:6px}
 .sim-sum{display:inline-block;background:rgba(255,255,255,.7);padding:6px 14px;border-radius:999px;font-size:13px;font-weight:800;color:#2e7d32;margin-bottom:16px}
-.sim-btn{padding:12px 30px;background:linear-gradient(90deg,#4CAF50,#2E7D32);color:#fff;border:none;border-radius:10px;font-weight:800;font-size:16px;font-family:inherit;cursor:pointer;box-shadow:0 3px 6px rgba(0,0,0,.15);transition:transform .2s}
+.sim-btn{
+  padding:12px 30px;background:linear-gradient(90deg,#4CAF50,#2E7D32);color:#fff;border:none;
+  border-radius:10px;font-weight:800;font-size:16px;font-family:inherit;cursor:pointer;
+  box-shadow:0 3px 6px rgba(0,0,0,.15);transition:transform .2s;
+}
 .sim-btn:hover{transform:translateY(-2px)}
+
+
 .cmp-table{width:100%;border-collapse:collapse;font-size:13.5px}
 .cmp-table th,.cmp-table td{padding:10px 12px;text-align:center;border-bottom:1px solid var(--border)}
 .cmp-table th{background:#faf9f5;font-weight:800;color:#475569;font-size:13px}
 .cmp-table th:first-child,.cmp-table td:first-child{text-align:right;font-weight:700;color:#334155}
 .cmp-table tr:last-child td{border-bottom:none}
 .table-scroll{overflow-x:auto}
+
+
 .assumptions{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px}
 .ass-item{display:flex;justify-content:space-between;align-items:center;padding:9px 12px;background:#faf9f5;border-radius:8px;font-size:12.5px;border:1px solid var(--border);gap:8px}
 .ass-item span:first-child{color:var(--muted);font-weight:500}
 .ass-item span:last-child{font-weight:800;color:var(--text);font-variant-numeric:tabular-nums}
 .ass-note{margin-top:14px;font-size:12px;color:var(--muted);line-height:1.8}
+
+
 footer{text-align:center;padding:28px 20px 40px;color:var(--muted);font-size:13px;border-top:1px solid var(--border);margin-top:20px}
 footer strong{color:var(--text)}
 </style>
@@ -127,47 +220,58 @@ footer strong{color:var(--text)}
 <body>
 <div class="wrap">
 
+
+  <!-- ================= الواجهة العلوية ================= -->
   <header class="hero">
     <div class="hero-badge"><i data-lucide="sun"></i> مشروع تخرج — هندسة الطاقة المتجددة</div>
     <h1>حاسبة الشمس — حاسبة الأنظمة الشمسية</h1>
-    <p>احسب احتياجاتك من الألواح والمحول والبطاريات، والتكلفة، وصافي القيمة الحالية NPV، ومعدل العائد الداخلي IRR — بناءً على بيانات المناطق السعودية.</p>
+    <p>احسب احتياجاتك من الألواح والمحول والبطاريات، والتكلفة الإجمالية، وفترة استرداد رأس المال، والقيمة الزمنية للنقود (TVM / NPV) — بناءً على بيانات المناطق السعودية.</p>
   </header>
 
+
   <div class="layout">
+
 
     <!-- ================= عمود المدخلات ================= -->
     <div>
       <div class="card inputs-card">
         <div class="card-title"><i data-lucide="sliders-horizontal"></i> بيانات النظام</div>
 
-        <!-- الاستهلاك مع اختيار الفترة -->
+
+        <!-- تحديد الفترة الزمنية والاستهلاك -->
         <div class="field">
-          <label><i data-lucide="zap"></i> الاستهلاك <span class="unit">(ك.و.س)</span></label>
-          <input type="number" id="demand" value="1500" min="1" step="1">
-          <div class="seg" style="margin-top:8px">
-            <label><input type="radio" name="period" value="monthly" checked><span>شهري</span></label>
-            <label><input type="radio" name="period" value="semi"><span>6 أشهر</span></label>
-            <label><input type="radio" name="period" value="yearly"><span>سنوي</span></label>
+          <label><i data-lucide="calendar"></i> فترة الاستهلاك والكمية</label>
+          <div class="grid-2col">
+            <select id="periodSelect">
+              <option value="1" selected>يومي (ك.و.س/يوم)</option>
+              <option value="30">شهري (ك.و.س/شهر)</option>
+              <option value="180">6 أشهر (ك.و.س/6أشهر)</option>
+              <option value="365">سنوي (ك.و.س/سنة)</option>
+            </select>
+            <input type="number" id="demand" value="50" min="1" step="1">
           </div>
-          <div class="panel-info" id="dailyEq" style="margin-top:8px">—</div>
-          <div class="presets" style="margin-top:8px">
-            <button class="preset-btn" data-daily="20">شقة (20/يوم)</button>
-            <button class="preset-btn active" data-daily="50">منزل (50/يوم)</button>
-            <button class="preset-btn" data-daily="100">فيلا (100/يوم)</button>
+          <div class="presets" id="presetsWrap">
+            <button class="preset-btn" data-d="20">شقة 20</button>
+            <button class="preset-btn active" data-d="50">منزل 50</button>
+            <button class="preset-btn" data-d="100">فيلا 100</button>
           </div>
         </div>
 
-        <div class="field">
+
+        <!-- قدرة اللوح -->
+        <div class="field" style="margin-top:16px">
           <label><i data-lucide="layout-grid"></i> قدرة اللوح الشمسي <span class="unit">(واط)</span></label>
           <div class="panel-opts" id="panelOpts"></div>
           <div class="panel-info" id="panelInfo">—</div>
         </div>
+
 
         <!-- المساحة -->
         <div class="field">
           <label><i data-lucide="maximize"></i> المساحة المتاحة <span class="unit">(م²)</span></label>
           <input type="number" id="area" value="60" min="1" step="1">
         </div>
+
 
         <!-- المنطقة -->
         <div class="field">
@@ -187,23 +291,29 @@ footer strong{color:var(--text)}
           </select>
         </div>
 
+
         <!-- السعر -->
         <div class="field">
-          <label><i data-lucide="receipt"></i> سعر الكهرباء الحالي <span class="unit">(هللة/ك.و.س)</span></label>
+          <label><i data-lucide="receipt"></i> سعر الكهرباء <span class="unit">(هللة/ك.و.س)</span></label>
           <input type="number" id="price" value="18" min="5" step="1">
         </div>
 
-        <!-- TVM: معدل الخصم -->
+
+        <!-- متغيرات TVM (Time Value of Money) -->
         <div class="field">
-          <label><i data-lucide="percent"></i> معدل الخصم — القيمة الزمنية للنقود <span class="unit">(%)</span></label>
-          <input type="number" id="discount" value="5" min="0" max="30" step="0.5">
+          <label><i data-lucide="trending-up"></i> القيمة الزمنية للنقود (TVM)</label>
+          <div class="grid-2col">
+            <div>
+              <span class="unit">معدل الخصم / الفائدة (%)</span>
+              <input type="number" id="discountRate" value="5" min="0" max="20" step="0.5">
+            </div>
+            <div>
+              <span class="unit">تضخم سعر الكهرباء (%/سنة)</span>
+              <input type="number" id="tariffEscalation" value="2" min="0" max="15" step="0.5">
+            </div>
+          </div>
         </div>
 
-        <!-- TVM: ارتفاع سعر الكهرباء -->
-        <div class="field">
-          <label><i data-lucide="trending-up"></i> ارتفاع سعر الكهرباء السنوي <span class="unit">(%)</span></label>
-          <input type="number" id="escalation" value="3" min="0" max="20" step="0.5">
-        </div>
 
         <!-- نوع النظام -->
         <div class="field">
@@ -215,6 +325,7 @@ footer strong{color:var(--text)}
           </div>
         </div>
 
+
         <div class="auto-note">
           <i data-lucide="info"></i>
           النتائج تتحدث تلقائياً مع كل تعديل — لا تحتاج الضغط على أي زر.
@@ -222,8 +333,10 @@ footer strong{color:var(--text)}
       </div>
     </div>
 
+
     <!-- ================= عمود النتائج ================= -->
     <div>
+
 
       <!-- المؤشرات الرئيسية -->
       <div class="kpi-grid">
@@ -242,7 +355,7 @@ footer strong{color:var(--text)}
         <div class="kpi blue">
           <div class="kpi-icon"><i data-lucide="cpu"></i></div>
           <div class="kpi-label">سعة المحول (Inverter)</div>
- <div class="kpi-value" id="kpiInv">—</div>
+          <div class="kpi-value" id="kpiInv">—</div>
           <div class="kpi-sub">كيلوواط</div>
         </div>
         <div class="kpi blue">
@@ -257,66 +370,53 @@ footer strong{color:var(--text)}
           <div class="kpi-value" id="kpiCost">—</div>
           <div class="kpi-sub">ريال سعودي (تقديري)</div>
         </div>
-        <div class="kpi purple">
-          <div class="kpi-icon"><i data-lucide="trending-up"></i></div>
-          <div class="kpi-label">صافي القيمة الحالية (NPV)</div>
-          <div class="kpi-value" id="kpiNpv">—</div>
-          <div class="kpi-sub">ريال (بعد الخصم)</div>
-        </div>
-        <div class="kpi purple">
-          <div class="kpi-icon"><i data-lucide="percent"></i></div>
-          <div class="kpi-label">معدل العائد الداخلي (IRR)</div>
-          <div class="kpi-value" id="kpiIrr">—</div>
-          <div class="kpi-sub">% سنوياً</div>
-        </div>
         <div class="kpi warn">
           <div class="kpi-icon"><i data-lucide="clock-3"></i></div>
           <div class="kpi-label">فترة استرداد رأس المال</div>
           <div class="kpi-value" id="kpiPayback">—</div>
-          <div class="kpi-sub">سنة (بسيطة)</div>
+          <div class="kpi-sub" id="kpiPaybackSub">سنة (بسيطة)</div>
         </div>
       </div>
 
-      <!-- التفاصيل الفنية -->
+
+      <!-- التفاصيل الفنية و TVM -->
       <div class="card">
-        <div class="card-title"><i data-lucide="wrench"></i> التفاصيل الفنية والتحقق من الحسابات</div>
-        <div class="detail-row"><span class="lbl">الاستهلاك اليومي المكافئ</span><span class="val" id="dDaily">—</span></div>
-        <div class="detail-row"><span class="lbl">الاستهلاك السنوي</span><span class="val" id="dAnnualUse">—</span></div>
+        <div class="card-title"><i data-lucide="wrench"></i> التفاصيل الفنية والجدوى المادية (TVM)</div>
+        <div class="detail-row"><span class="lbl">الاستهلاك اليومي المكافئ</span><span class="val" id="dDailyDemand">—</span></div>
+        <div class="detail-row"><span class="lbl">القدرة الفعلية بعد التقريب للوح كامل</span><span class="val" id="dKwpActual">—</span></div>
         <div class="detail-row"><span class="lbl">الإنتاج السنوي المتوقع</span><span class="val" id="dProd">—</span></div>
-        <div class="detail-row"><span class="lbl">نسبة (الإنتاج / الاستهلاك)</span><span class="val" id="dRatio">—</span></div>
-        <div class="detail-row"><span class="lbl">القدرة الفعلية بعد التقريب</span><span class="val" id="dKwpActual">—</span></div>
         <div class="detail-row"><span class="lbl">المساحة المطلوبة للألواح</span><span class="val" id="dArea">—</span></div>
         <div class="area-check">
           <div class="area-bar"><div class="area-fill" id="areaFill" style="width:0%"></div></div>
           <div class="area-msg" id="areaMsg">—</div>
         </div>
-        <div class="detail-row" style="margin-top:12px"><span class="lbl">الوفر الإجمالي في السنة الأولى</span><span class="val" id="dSave">—</span></div>
-        <div class="detail-row"><span class="lbl">الصيانة السنوية (ثابتة اسمياً)</span><span class="val" id="dMaint">—</span></div>
-        <div class="detail-row"><span class="lbl">صافي الوفر في السنة الأولى</span><span class="val" id="dNet">—</span></div>
-        <div class="detail-row"><span class="lbl">التكلفة الموحدة للكهرباء (LCOE)</span><span class="val" id="dLcoe">—</span></div>
-        <div class="detail-row"><span class="lbl">مقارنة LCOE بسعر الشبكة</span><span class="val" id="dLcoeCmp">—</span></div>
-        <div class="detail-row"><span class="lbl">فترة الاسترداد البسيطة</span><span class="val" id="dPbSimple">—</span></div>
-        <div class="detail-row"><span class="lbl">فترة الاسترداد المخصومة (TVM)</span><span class="val" id="dPbDisc">—</span></div>
+        <div class="detail-row" style="margin-top:12px"><span class="lbl">الوفر السنوي المباشر (السنة الأولى)</span><span class="val" id="dSave">—</span></div>
+        <div class="detail-row"><span class="lbl">تكلفة الصيانة السنوية التقديرية</span><span class="val" id="dMaint">—</span></div>
+        <div class="detail-row"><span class="lbl">صافي القيمة الحالية للاستثمار (NPV)</span><span class="val" id="dNpv">—</span></div>
+        <div class="detail-row"><span class="lbl">فترة الاسترداد الخصمية (Discounted Payback)</span><span class="val" id="dDiscPayback">—</span></div>
         <div class="detail-row"><span class="lbl">الانبعاثات الموفرة سنوياً (CO₂)</span><span class="val" id="dCo2">—</span></div>
       </div>
 
+
       <!-- الرسوم البيانية -->
       <div class="charts-grid">
-[10/27/2026 7:45 PM] مالك الشمري: <div class="card">
+        <div class="card">
           <div class="card-title"><i data-lucide="pie-chart"></i> توزيع التكاليف</div>
           <div id="chartCost" class="chart-box"></div>
         </div>
         <div class="card">
-          <div class="card-title"><i data-lucide="trending-up"></i> الوفر التراكمي — اسمي ومخصوم (25 سنة)</div>
+          <div class="card-title"><i data-lucide="trending-up"></i> التدفق النقدي التراكمي المخصوم (TVM)</div>
           <div id="chartSave" class="chart-box"></div>
         </div>
       </div>
+
 
       <!-- التقييم -->
       <div class="verdict excellent" id="verdictBox">
         <h3><i data-lucide="badge-check"></i> <span id="verdictText">—</span></h3>
         <p id="verdictDesc">—</p>
       </div>
+
 
       <!-- المحاكي ثلاثي الأبعاد -->
       <div class="sim-card">
@@ -326,6 +426,7 @@ footer strong{color:var(--text)}
         <button class="sim-btn" id="simBtn" type="button">📐 افتح المحاكي مع بيانات النظام</button>
       </div>
 
+
       <!-- المقارنة -->
       <div class="card">
         <div class="card-title"><i data-lucide="git-compare"></i> مقارنة بين خيارات النظام (لنفس الاستهلاك)</div>
@@ -333,20 +434,18 @@ footer strong{color:var(--text)}
           <table class="cmp-table">
             <thead><tr><th>المؤشر</th><th>متصل بالشبكة</th><th>هجين</th><th>منفصل بالكامل</th></tr></thead>
             <tbody>
-              <tr><td>القدرة (kWp)</td><td id="c1kwp">—</td><td id="c2kwp">—</td><td id="c3kwp">—</td></tr>
+              <tr><td>قدرة النظام (kWp)</td><td id="c1kwp">—</td><td id="c2kwp">—</td><td id="c3kwp">—</td></tr>
               <tr><td>عدد الألواح</td><td id="c1p">—</td><td id="c2p">—</td><td id="c3p">—</td></tr>
               <tr><td>البطاريات (ك.و.س)</td><td>—</td><td id="c2b">—</td><td id="c3b">—</td></tr>
               <tr><td>التكلفة الإجمالية (ريال)</td><td id="c1c">—</td><td id="c2c">—</td><td id="c3c">—</td></tr>
-              <tr><td>NPV (ريال)</td><td id="c1npv">—</td><td id="c2npv">—</td><td id="c3npv">—</td></tr>
-              <tr><td>IRR (%)</td><td id="c1irr">—</td><td id="c2irr">—</td><td id="c3irr">—</td></tr>
-              <tr><td>LCOE (هللة/ك.و.س)</td><td id="c1lcoe">—</td><td id="c2lcoe">—</td><td id="c3lcoe">—</td></tr>
-              <tr><td>فترة الاسترداد البسيطة</td><td id="c1pb">—</td><td id="c2pb">—</td><td id="c3pb">—</td></tr>
-              <tr><td>فترة الاسترداد المخصومة</td><td id="c1pbd">—</td><td id="c2pbd">—</td><td id="c3pbd">—</td></tr>
+              <tr><td>الاسترداد البسيط (سنة)</td><td id="c1pb">—</td><td id="c2pb">—</td><td id="c3pb">—</td></tr>
+              <tr><td>صافي القيمة الحالية (NPV)</td><td id="c1npv">—</td><td id="c2npv">—</td><td id="c3npv">—</td></tr>
               <tr><td>يعمل أثناء انقطاع الكهرباء؟</td><td>لا</td><td>نعم (جزئي)</td><td>نعم</td></tr>
             </tbody>
           </table>
         </div>
       </div>
+
 
       <!-- الافتراضات -->
       <div class="card">
@@ -362,21 +461,20 @@ footer strong{color:var(--text)}
           <div class="ass-item"><span>كفاءة النظام (PR)</span><span>75%</span></div>
           <div class="ass-item"><span>تدهور الألواح سنوياً</span><span>0.5%</span></div>
           <div class="ass-item"><span>عمر النظام الافتراضي</span><span>25 سنة</span></div>
-          <div class="ass-item"><span>الصيانة السنوية</span><span>1% من التكلفة (ثابتة)</span></div>
+          <div class="ass-item"><span>الصيانة السنوية</span><span>1% من التكلفة</span></div>
           <div class="ass-item"><span>عامل انبعاث الشبكة</span><span>0.65 كغ CO₂/ك.و.س</span></div>
-<div class="ass-item"><span>احتياطي البطاريات (منفصل)</span><span>يوم كامل</span></div>
-          <div class="ass-item"><span>معدل الخصم (TVM)</span><span id="aDisc">—</span></div>
-          <div class="ass-item"><span>ارتفاع سعر الكهرباء</span><span id="aEsc">—</span></div>
+          <div class="ass-item"><span>احتياطي البطاريات (منفصل)</span><span>يوم كامل</span></div>
         </div>
         <p class="ass-note">
-          المعادلة الأساسية: القدرة المطلوبة (kWp) = الاستهلاك اليومي ÷ ساعات الذروة الشمسية ÷ كفاءة النظام.
-          <br>TVM: يُحسب الوفر لكل سنة بأسعار كهرباء متزايدة ثم يُخصم بمعدل الخصم. NPV = PV(الوفر) − التكلفة. IRR = معدل الخصم الذي يجعل NPV = 0. LCOE = PV(التكاليف) ÷ PV(الإنتاج).
-          <br>جميع الأسعار تقديرية وقد تتغير بتغير السوق — يُنصح بمراجعة عروض الشركات المحلية للحصول على تسعير دقيق.
+          المعادلة الأساسية: القدرة المطلوبة (kWp) = الاستهلاك اليومي ÷ ساعات الذروة الشمسية ÷ كفاءة النظام.<br>
+          معادلة القيمة الزمنية للنقود: NPV = -C₀ + Σ [ CFₜ / (1 + r)ᵗ ] حيث CFₜ هو التدفق النقدي الصافي بعد الخصم والتضخم المطبق على الفاتورة.
         </p>
       </div>
 
+
     </div>
   </div>
+
 
   <footer>
     <p><strong>حاسبة الشمس</strong> — أداة تقديرية لتقييم جدوى الأنظمة الشمسية المنزلية</p>
@@ -384,9 +482,11 @@ footer strong{color:var(--text)}
   </footer>
 </div>
 
+
 <script>
 (function(){
   "use strict";
+
 
   /* =====================================================
      1) الثوابت وبيانات الألواح
@@ -396,6 +496,8 @@ footer strong{color:var(--text)}
     eff:0.75, deg:0.005, life:25, maint:0.01, co2:0.65, battDoD:0.5
   };
 
+
+  // ألواح تجارية شائعة: الأبعاد بالمتر، cols × rows = ترتيب الخلايا (نصف خلية)
   var PANELS = {
     400:{watt:400, len:1.722, wid:1.134, cols:6, rows:18, price:550},
     450:{watt:450, len:1.903, wid:1.134, cols:6, rows:20, price:650},
@@ -405,116 +507,94 @@ footer strong{color:var(--text)}
   var panel = PANELS[550];
   function panelArea(p){ return p.len * p.wid; }
 
+
   /* =====================================================
      2) دوال مساعدة
      ===================================================== */
   function $(id){ return document.getElementById(id); }
   function fmt(n, dec){
     if(!isFinite(n)) return "—";
-    return n.toLocaleString('ar-EG', {minimumFractionDigits:dec0, maximumFractionDigits:dec0});
-  }
-  function periodToDays(period){
-    if(period === 'monthly') return 365/12;   // 30.417
-    if(period === 'semi')    return 365/2;    // 182.5
-    return 365;                                // yearly
+    return n.toLocaleString('ar-EG', {minimumFractionDigits:dec||0, maximumFractionDigits:dec||0});
   }
 
+
   /* =====================================================
-     3) محرك الحساب (مع TVM)
+     3) محرك الحساب مع تطبيق TVM (Time Value of Money)
      ===================================================== */
-  function computeFor(dailyDemand, sun, price, type, p, discRate, escRate){
-    // --- التصميم الأساسي ---
+  function computeFor(dailyDemand, sun, price, type, p, discountRate, tariffEscalation){
+    discountRate = (discountRate || 0) / 100;
+    tariffEscalation = (tariffEscalation || 0) / 100;
+
+
     var kwp = dailyDemand / sun / C.eff;
     var batt = 0;
     if(type === 'offgrid'){ kwp *= 1.25; batt = dailyDemand * 1 / C.battDoD; }
     else if(type === 'hybrid'){ kwp *= 1.1; batt = dailyDemand * 0.4 / C.battDoD; }
+
 
     var panels    = Math.max(1, Math.ceil(kwp * 1000 / p.watt));
     var kwpActual = panels * p.watt / 1000;
     var areaNeed  = panels * panelArea(p);
     var inv       = Math.max(1, Math.ceil(kwpActual * 1.1));
 
-    // --- التكلفة ---
+
     var costP = panels * p.price;
     var costI = inv * C.invCostKW;
     var costB = batt * C.battCostKWH;
     var costInst = (costP + costI + costB) * C.instRate;
     var total = costP + costI + costB + costInst;
-    var maintCost = total * C.maint;
 
-    // --- الإنتاج والاستهلاك ---
+
     var annualProd = kwpActual * sun * 365 * C.eff;
     var annualUse  = dailyDemand * 365;
+    var annualSave = (type === 'offgrid') ? annualUse * price : Math.min(annualUse, annualProd) * price;
+    var maintCost  = total * C.maint;
+    var netSaveFirstYear = annualSave - maintCost;
+    var simplePayback = netSaveFirstYear > 0 ? total / netSaveFirstYear : 99;
+    var co2kg         = annualProd * C.co2;
 
-    // --- التدفقات النقدية مع TVM (تصعيد السعر + خصم) ---
-    var cashflows = [-total];
-    var cumNom = 0, cumDisc = 0;
-    var cumNomArr = [0], cumDiscArr = [0];
-    var nomPayback = 99, discPayback = 99;
+
+    // حساب القيمة الزمنية للنقود (TVM) والـ NPV
+    var years = [], cumDiscountedArr = [], cumDiscounted = -total;
+    var npv = -total;
+    var discountedPayback = 99;
+
+
+    years.push(0);
+    cumDiscountedArr.push(-total);
+
 
     for(var y = 1; y <= C.life; y++){
-      var priceY  = price * Math.pow(1 + escRate, y - 1);
-      var prodY   = annualProd * Math.pow(1 - C.deg, y - 1);
-      var grossSave = Math.min(annualUse, prodY) * priceY;
-      var netSave   = grossSave - maintCost;
+      years.push(y);
+      var currentTariff = price * Math.pow(1 + tariffEscalation, y - 1);
+      var prodY = annualProd * Math.pow(1 - C.deg, y - 1);
+      var grossSaveY = (type === 'offgrid') ? annualUse * currentTariff : Math.min(annualUse, prodY) * currentTariff;
+      var netCashFlowY = grossSaveY - maintCost;
 
-      cashflows.push(netSave);
-      cumNom  += netSave;
-      cumDisc += netSave / Math.pow(1 + discRate, y);
-      cumNomArr.push(cumNom);
-      cumDiscArr.push(cumDisc);
- if(nomPayback === 99 && cumNom  >= total) nomPayback  = y;
-      if(discPayback === 99 && cumDisc >= total) discPayback = y;
+
+      // الخصم للقيمة الحالية Present Value
+      var pvY = netCashFlowY / Math.pow(1 + discountRate, y);
+      npv += pvY;
+      cumDiscounted += pvY;
+      cumDiscountedArr.push(cumDiscounted);
+
+
+      if(discountedPayback === 99 && cumDiscounted >= 0){
+        var prevCum = cumDiscounted - pvY;
+        discountedPayback = (y - 1) + (Math.abs(prevCum) / pvY);
+      }
     }
 
-    var npv = cumDisc - total;
-    var irrPct = computeIRR(cashflows);
-
-    // --- LCOE (التكلفة الموحدة للكهرباء) ---
-    var pvCosts = total;
-    var pvProd  = 0;
-    for(var y2 = 1; y2 <= C.life; y2++){
-      pvCosts += maintCost / Math.pow(1 + discRate, y2);
-      pvProd  += annualProd * Math.pow(1 - C.deg, y2 - 1) / Math.pow(1 + discRate, y2);
-    }
-    var lcoe = pvProd > 0 ? pvCosts / pvProd : 0;
-
-    // --- السنة الأولى فقط للعرض ---
-    var firstGrossSave = Math.min(annualUse, annualProd) * price;
-    var firstNetSave = firstGrossSave - maintCost;
-    var co2kg = annualProd * C.co2;
 
     return {
-      kwp:kwp, kwpActual:kwpActual, panels:panels, areaNeed:areaNeed, inv:inv, batt:batt,
-      costP:costP, costI:costI, costB:costB, costInst:costInst, total:total, maintCost:maintCost,
-      annualProd:annualProd, annualUse:annualUse,
-      annualSave:firstGrossSave, netSave:firstNetSave,
-      npv:npv, irr:irrPct, lcoe:lcoe,
-      nomPayback:nomPayback, discPayback:discPayback,
-      co2kg:co2kg,
-      years:Array.from({length:C.life+1}, (_,i)=>i),
-      cumNomArr:cumNomArr, cumDiscArr:cumDiscArr
+      dailyDemand:dailyDemand, kwp:kwp, kwpActual:kwpActual, panels:panels, areaNeed:areaNeed, inv:inv, batt:batt,
+      costP:costP, costI:costI, costB:costB, costInst:costInst, total:total,
+      annualProd:annualProd, annualSave:annualSave, maintCost:maintCost, netSaveFirstYear:netSaveFirstYear,
+      payback:simplePayback, discountedPayback:discountedPayback, npv:npv, co2kg:co2kg,
+      years:years, cumDiscountedArr:cumDiscountedArr
     };
   }
 
-  /* IRR بطريقة التنصيف */
-  function computeIRR(cf){
-    // هل يوجد استرداد اسمي؟
-    var sum = 0;
-    for(var i = 0; i < cf.length; i++) sum += cf[i];
-    if(sum <= 0) return null;
-
-    var lo = -0.5, hi = 2.0, mid = 0;
-    for(var it = 0; it < 200; it++){
-      mid = (lo + hi) / 2;
-      var npv = 0;
-      for(var y = 0; y < cf.length; y++){
-        npv += cf[y] / Math.pow(1 + mid, y);
-      }
-      if(npv > 0) lo = mid; else hi = mid;
-    }
-    return mid * 100;
-  }
 
   /* =====================================================
      4) الرسوم البيانية
@@ -528,13 +608,14 @@ footer strong{color:var(--text)}
     recalc();
   }
 
+
   function renderCharts(r){
     if(!chartCost || !chartSave) return;
-
     var costData = [{name:'الألواح الشمسية', value:Math.round(r.costP)}];
     if(r.costI > 0) costData.push({name:'المحول (Inverter)', value:Math.round(r.costI)});
     if(r.costB > 0) costData.push({name:'البطاريات', value:Math.round(r.costB)});
     costData.push({name:'التركيب والمواد', value:Math.round(r.costInst)});
+
 
     chartCost.setOption({
       color:['#ea580c','#0e7490','#8b5cf6','#94a3b8'],
@@ -549,41 +630,34 @@ footer strong{color:var(--text)}
       }]
     }, true);
 
+
+    var dpbYear = Math.ceil(r.discountedPayback);
     chartSave.setOption({
-      color:['#16a34a', '#ea580c'],
-      tooltip:{trigger:'axis', textStyle:{fontFamily:'Tajawal', fontSize:12}},
-      legend:{bottom:0, textStyle:{fontFamily:'Tajawal', fontSize:11}, data:['الوفر الاسمي','الوفر المخصوم (TVM)']},
-      grid:{left:55, right:20, top:20, bottom:55},
+      tooltip:{trigger:'axis', textStyle:{fontFamily:'Tajawal', fontSize:12},
+        formatter:function(p){ var d = p[0]; return 'السنة ' + d.name + '<br/>صافي القيمة التراكمية: ' + fmt(d.value, 0) + ' ريال'; }},
+      grid:{left:50, right:20, top:30, bottom:40},
       xAxis:{type:'category', data:r.years, name:'السنة', nameTextStyle:{fontFamily:'Tajawal'},
         axisLabel:{fontFamily:'Tajawal', fontSize:10}, axisLine:{lineStyle:{color:'#cbd5e1'}}},
       yAxis:{type:'value', name:'ريال', nameTextStyle:{fontFamily:'Tajawal'},
- axisLabel:{fontFamily:'Tajawal', fontSize:10, formatter:function(v){ return Math.abs(v) >= 1000 ? (v/1000).toFixed(0) + 'ألف' : v; }},
+        axisLabel:{fontFamily:'Tajawal', fontSize:10, formatter:function(v){ return (v/1000) + 'ألف'; }},
         splitLine:{lineStyle:{color:'#f1f5f9'}}},
-      series:[
-        {name:'الوفر الاسمي', type:'line', smooth:true, data:r.cumNomArr, symbol:'circle', symbolSize:4,
-         lineStyle:{width:3, color:'#16a34a'}, itemStyle:{color:'#16a34a'},
-         areaStyle:{color:{type:'linear', x:0, y:0, x2:0, y2:1,
-           colorStops:[{offset:0, color:'rgba(22,163,74,.20)'}, {offset:1, color:'rgba(22,163,74,.02)'}]}}},
-        {name:'الوفر المخصوم (TVM)', type:'line', smooth:true, data:r.cumDiscArr, symbol:'circle', symbolSize:4,
-         lineStyle:{width:3, color:'#ea580c', type:'solid'}, itemStyle:{color:'#ea580c'}},
-      ],
-      markLine: undefined
+      series:[{
+        name:'الصافي التراكمي المخصوم', type:'line', smooth:true, data:r.cumDiscountedArr, symbol:'circle', symbolSize:5,
+        lineStyle:{width:3, color:'#16a34a'}, itemStyle:{color:'#16a34a'},
+        areaStyle:{color:{type:'linear', x:0, y:0, x2:0, y2:1,
+          colorStops:[{offset:0, color:'rgba(22,163,74,.28)'}, {offset:1, color:'rgba(22,163,74,.02)'}]}},
+        markLine:{silent:true, symbol:'none', lineStyle:{color:'#d97706', type:'dashed', width:1.5},
+          data:[{yAxis:0}]},
+        markPoint:(dpbYear <= 25 ? {symbol:'pin', symbolSize:46, itemStyle:{color:'#ea580c'},
+          label:{color:'#fff', fontSize:10, fontFamily:'Tajawal', formatter:'تعادل'},
+          data:[{coord:[dpbYear, 0]}]} : undefined)
+      }]
     }, true);
-
-    // خط مرجعي للتكلفة (يُضاف بعد setOption الأول)
-    chartSave.setOption({
-      series:[
-        { name:'الوفر الاسمي', markLine:{silent:true, symbol:'none',
-          lineStyle:{color:'#0e7490', type:'dashed', width:2},
-          label:{formatter:'التكلفة = ' + fmt(r.total, 0) + ' ريال', fontFamily:'Tajawal', fontSize:11, color:'#0e7490'},
-          data:[{yAxis:Math.round(r.total)}]}},
-        { name:'الوفر المخصوم (TVM)' }
-      ]
-    });
   }
 
+
   /* =====================================================
-     5) تحديث الواجهة
+     5) تحديث الواجهة (يُستدعى مع كل تعديل)
      ===================================================== */
   function updatePanelInfo(){
     var p = panel;
@@ -597,37 +671,68 @@ footer strong{color:var(--text)}
     $('kpiPanelsSub').textContent = 'لوح × ' + p.watt + ' واط';
   }
 
+
+  function updatePresetsLabels(){
+    var mult = parseFloat($('periodSelect').value) || 1;
+    var wrap = $('presetsWrap');
+    wrap.innerHTML = '';
+    
+    var presetsData = [
+      {label:'شقة', base:20},
+      {label:'منزل', base:50},
+      {label:'فيلا', base:100}
+    ];
+
+
+    presetsData.forEach(function(item){
+      var val = item.base * mult;
+      var btn = document.createElement('button');
+      btn.className = 'preset-btn' + (parseFloat($('demand').value) === val ? ' active' : '');
+      btn.setAttribute('data-d', val);
+      btn.textContent = item.label + ' ' + val;
+      btn.addEventListener('click', function(){
+        document.querySelectorAll('.preset-btn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        $('demand').value = val;
+        recalc();
+      });
+      wrap.appendChild(btn);
+    });
+  }
+
+
   function recalc(){
-    // قراءة الاستهلاك حسب الفترة
-    var demandVal = parseFloat($('demand').value) || 0;
-    var periodEl = document.querySelector('input[name="period"]:checked');
-    var period = periodEl ? periodEl.value : 'monthly';
-    var daysInPeriod = periodToDays(period);
-    var dailyDemand = demandVal / daysInPeriod;
-    var annualUse = dailyDemand * 365;
+    var periodFactor = parseFloat($('periodSelect').value) || 1;
+    var rawDemand    = parseFloat($('demand').value) || 0;
+    var dailyDemand  = rawDemand / periodFactor;
+
 
     var area   = parseFloat($('area').value) || 0;
     var sun    = parseFloat($('region').value) || 5.5;
     var price  = (parseFloat($('price').value) || 0) / 100;
-    var discRate = (parseFloat($('discount').value) || 0) / 100;
-    var escRate  = (parseFloat($('escalation').value) || 0) / 100;
     var typeEl = document.querySelector('input[name="sysType"]:checked');
     var type   = typeEl ? typeEl.value : 'grid';
-    if(demandVal <= 0 || price <= 0) return;
 
-    var r = computeFor(dailyDemand, sun, price, type, panel, discRate, escRate);
 
-    // بيانات المحاكي
+    var discountRate = parseFloat($('discountRate').value) || 0;
+    var tariffEscalation = parseFloat($('tariffEscalation').value) || 0;
+
+
+    if(dailyDemand <= 0 || price <= 0) return;
+
+
+    var r = computeFor(dailyDemand, sun, price, type, panel, discountRate, tariffEscalation);
+
+
+    // البيانات المحفوظة للمحاكي
     window.__solar = {
       panels:r.panels, watt:panel.watt, len:panel.len, wid:panel.wid,
       cc:panel.cols, cr:panel.rows, area:r.areaNeed
     };
     $('simSummary').textContent = r.panels + ' لوح × ' + panel.watt + ' واط = ' + r.kwpActual.toFixed(2) + ' kWp';
 
-    // الاستهلاك اليومي المكافئ
-    $('dailyEq').innerHTML = '= ' + fmt(dailyDemand, 1) + ' ك.و.س/يوم &nbsp;≈&nbsp; ' + fmt(annualUse, 0) + ' ك.و.س/سنة';
 
-    // KPIs
+    // المؤشرات
     $('kpiKwp').textContent    = fmt(r.kwpActual, 2);
     $('kpiPanels').textContent = fmt(r.panels, 0);
     $('kpiInv').textContent    = fmt(r.inv, 0);
@@ -639,31 +744,23 @@ footer strong{color:var(--text)}
       $('kpiBattSub').textContent = 'نظام متصل بالشبكة';
     }
     $('kpiCost').textContent    = fmt(r.total, 0);
-    $('kpiNpv').textContent     = fmt(r.npv, 0);
-    $('kpiIrr').textContent     = r.irr === null ? '—' : fmt(r.irr, 1);
-    $('kpiPayback').textContent = r.nomPayback >= 99 ? '> 25' : fmt(r.nomPayback, 0);
- // التفاصيل
-    $('dDaily').textContent     = fmt(dailyDemand, 1) + ' ك.و.س/يوم';
-    $('dAnnualUse').textContent = fmt(r.annualUse, 0) + ' ك.و.س';
-    $('dProd').textContent      = fmt(r.annualProd, 0) + ' ك.و.س';
-    var ratio = r.annualUse > 0 ? r.annualProd / r.annualUse : 0;
-    $('dRatio').textContent = fmt(ratio * 100, 1) + '%';
-    $('dRatio').className = 'val ' + (ratio >= 0.95 && ratio <= 1.15 ? 'ok' : (ratio < 0.95 ? 'bad' : ''));
+    $('kpiPayback').textContent = r.payback >= 99 ? '—' : fmt(r.payback, 1);
 
-    $('dKwpActual').textContent = fmt(r.kwpActual, 2) + ' ك.و';
-    $('dArea').textContent = fmt(r.areaNeed, 1) + ' م²';
-    $('dSave').textContent = fmt(r.annualSave, 0) + ' ريال/سنة';
-    $('dMaint').textContent = fmt(r.maintCost, 0) + ' ريال/سنة';
-    $('dNet').textContent = fmt(r.netSave, 0) + ' ريال/سنة';
-    $('dLcoe').textContent = fmt(r.lcoe * 100, 2) + ' هللة/ك.و.س';
-    var lcoeCmp = price - r.lcoe;
-    $('dLcoeCmp').textContent = lcoeCmp >= 0
-      ? 'أقل من الشبكة بـ ' + fmt(lcoeCmp * 100, 2) + ' هللة ✓'
-      : 'أعلى من الشبكة بـ ' + fmt(-lcoeCmp * 100, 2) + ' هللة ✗';
-    $('dLcoeCmp').className = 'val ' + (lcoeCmp >= 0 ? 'ok' : 'bad');
-    $('dPbSimple').textContent = r.nomPayback >= 99 ? '> 25 سنة' : fmt(r.nomPayback, 1) + ' سنة';
-    $('dPbDisc').textContent = r.discPayback >= 99 ? '> 25 سنة' : fmt(r.discPayback, 1) + ' سنة';
-    $('dCo2').textContent = fmt(r.co2kg / 1000, 1) + ' طن/سنة ≈ ' + fmt(r.co2kg / 22, 0) + ' شجرة';
+
+    // التفاصيل
+    $('dDailyDemand').textContent = fmt(r.dailyDemand, 1) + ' ك.و.س/يوم';
+    $('dKwpActual').textContent   = fmt(r.kwpActual, 2) + ' ك.و';
+    $('dProd').textContent        = fmt(r.annualProd, 0) + ' ك.و.س/سنة';
+    $('dArea').textContent        = fmt(r.areaNeed, 1) + ' م²';
+    $('dSave').textContent        = fmt(r.annualSave, 0) + ' ريال/سنة';
+    $('dMaint').textContent       = fmt(r.maintCost, 0) + ' ريال/سنة';
+    $('dNpv').textContent         = fmt(r.npv, 0) + ' ريال';
+    $('dNpv').style.color         = r.npv >= 0 ? '#16a34a' : '#dc2626';
+    $('dDiscPayback').textContent = r.discountedPayback >= 99 ? 'تتجاوز 25 سنة' : fmt(r.discountedPayback, 1) + ' سنة';
+
+
+    $('dCo2').textContent   = fmt(r.co2kg / 1000, 1) + ' طن/سنة ≈ ' + fmt(r.co2kg / 22, 0) + ' شجرة';
+
 
     // شريط المساحة
     var pct = area > 0 ? Math.min(100, (r.areaNeed / area) * 100) : 100;
@@ -679,43 +776,40 @@ footer strong{color:var(--text)}
       areaMsg.style.color = '#dc2626';
     }
 
-    // التقييم (قائم على NPV أساساً)
+
+    // التقييم
     var box = $('verdictBox'), title = $('verdictText'), desc = $('verdictDesc');
     box.className = 'verdict';
-    if(r.npv <= 0){
-      box.classList.add('poor');
-      title.textContent = 'غير مجدٍ اقتصادياً (NPV سالب)';
-      desc.textContent = 'صافي القيمة الحالية = ' + fmt(r.npv, 0) + ' ريال — الاستثمار لا يغطي معدل الخصم ' + fmt(discRate*100, 1) + '%. فترة الاسترداد البسيطة ' + (r.nomPayback>=99 ? 'أكثر من 25' : fmt(r.nomPayback, 1)) + ' سنة. جرّب تقليل الاستهلاك أو زيادة المساحة.';
-    } else if(r.irr !== null && r.irr > discRate * 100 * 1.8 && r.nomPayback <= 8){
+    if(r.npv > 0 && r.discountedPayback <= 8){
       box.classList.add('excellent');
-      title.textContent = 'استثمار ممتاز — عائد مرتفع';
-      desc.textContent = 'NPV = ' + fmt(r.npv, 0) + ' ريال، IRR = ' + fmt(r.irr, 1) + '% (يتجاوز معدل الخصم بفارق كبير). فترة الاسترداد البسيطة ' + fmt(r.nomPayback, 1) + ' سنة، والمخصومة ' + (r.discPayback>=99?'>25':fmt(r.discPayback,1)) + ' سنة. الإنتاج يغطي ' + fmt(ratio*100, 0) + '% من الاستهلاك.';
-    } else {
+      title.textContent = 'استثمار ممتاز — جدوى اقتصادية عالية (NPV إيجابي)';
+      desc.textContent = 'صافي القيمة الحالية للنظام (NPV) هو ' + fmt(r.npv, 0) + ' ريال. ستسترد رأس مالك المخصوم خلال ' + fmt(r.discountedPayback, 1) + ' سنة، مما يجعل المشروع مربحاً ومجدياً للغاية.';
+    } else if(r.npv >= 0){
       box.classList.add('good');
-      title.textContent = 'جدوى اقتصادية جيدة';
-      desc.textContent = 'NPV = ' + fmt(r.npv, 0) + ' ريال، IRR = ' + (r.irr===null?'—':fmt(r.irr, 1)) + '%. فترة الاسترداد البسيطة ' + (r.nomPayback>=99?'>25':fmt(r.nomPayback,1)) + ' سنة، والمخصومة ' + (r.discPayback>=99?'>25':fmt(r.discPayback,1)) + ' سنة. LCOE = ' + fmt(r.lcoe*100, 2) + ' هللة مقابل ' + fmt(price*100, 1) + ' هللة من الشبكة.';
+      title.textContent = 'جدوى اقتصادية مقبولة';
+      desc.textContent = 'صافي القيمة الحالية (NPV) إيجابي بمقدار ' + fmt(r.npv, 0) + ' ريال، مع فترة استرداد مخصومة قدرها ' + (r.discountedPayback >= 99 ? '—' : fmt(r.discountedPayback, 1)) + ' سنة.';
+    } else {
+      box.classList.add('poor');
+      title.textContent = 'جدوى محدودة تحت الخصم الحالي';
+      desc.textContent = 'صافي القيمة الحالية (NPV) بالسالب (' + fmt(r.npv, 0) + ' ريال). يفضل مراجعة نسبة الخصم، تكلفة النظام، أو انتظار ارتفاع التعريفة.';
     }
+
 
     // المقارنة
     ['grid', 'hybrid', 'offgrid'].forEach(function(t, i){
-      var n = i + 1, c = computeFor(dailyDemand, sun, price, t, panel, discRate, escRate);
-      $('c' + n + 'kwp').textContent  = fmt(c.kwpActual, 1);
-      $('c' + n + 'p').textContent    = fmt(c.panels, 0);
-      $('c' + n + 'c').textContent    = fmt(c.total, 0);
-      $('c' + n + 'npv').textContent  = fmt(c.npv, 0);
-[10/27/2026 7:45 PM] مالك الشمري: $('c' + n + 'irr').textContent  = c.irr === null ? '—' : fmt(c.irr, 1);
-      $('c' + n + 'lcoe').textContent = fmt(c.lcoe * 100, 1);
-      $('c' + n + 'pb').textContent   = c.nomPayback >= 99 ? '>25' : fmt(c.nomPayback, 1);
-      $('c' + n + 'pbd').textContent  = c.discPayback >= 99 ? '>25' : fmt(c.discPayback, 1);
+      var n = i + 1, c = computeFor(dailyDemand, sun, price, t, panel, discountRate, tariffEscalation);
+      $('c' + n + 'kwp').textContent = fmt(c.kwpActual, 1);
+      $('c' + n + 'p').textContent   = fmt(c.panels, 0);
+      $('c' + n + 'c').textContent   = fmt(c.total, 0);
+      $('c' + n + 'pb').textContent  = c.payback >= 99 ? '—' : fmt(c.payback, 1);
+      $('c' + n + 'npv').textContent = fmt(c.npv, 0);
       if(n > 1) $('c' + n + 'b').textContent = fmt(c.batt, 1);
     });
 
-    // قيم الافتراضات الديناميكية
-    $('aDisc').textContent = fmt(discRate*100, 1) + '%';
-    $('aEsc').textContent  = fmt(escRate*100, 1) + '%/سنة';
 
     renderCharts(r);
   }
+
 
   /* =====================================================
      6) اختيار قدرة اللوح
@@ -740,45 +834,33 @@ footer strong{color:var(--text)}
     });
   })();
 
+
   /* =====================================================
-     7) أحداث المستخدم
+     7) الأحداث العامة
      ===================================================== */
-  // Presets (تحوّل إلى القيمة حسب الفترة الحالية)
-  document.querySelectorAll('.preset-btn').forEach(function(btn){
-    btn.addEventListener('click', function(){
-      document.querySelectorAll('.preset-btn').forEach(function(b){ b.classList.remove('active'); });
-      btn.classList.add('active');
-      var dailyEq = parseFloat(btn.getAttribute('data-daily')) || 0;
-      var periodEl = document.querySelector('input[name="period"]:checked');
-      var period = periodEl ? periodEl.value : 'monthly';
-      var days = periodToDays(period);
-      $('demand').value = Math.round(dailyEq * days);
-      recalc();
-    });
+  $('periodSelect').addEventListener('change', function(){
+    updatePresetsLabels();
+    recalc();
   });
 
-  // إدخالات عامة
-  ['demand', 'area', 'region', 'price', 'discount', 'escalation'].forEach(function(id){
+
+  ['demand', 'area', 'region', 'price', 'discountRate', 'tariffEscalation'].forEach(function(id){
     $(id).addEventListener('input', recalc);
     $(id).addEventListener('change', recalc);
   });
-
-  // نوع النظام
+  
   document.querySelectorAll('input[name="sysType"]').forEach(function(r){
     r.addEventListener('change', recalc);
   });
 
-  // الفترة (شهري/نصفي/سنوي) → تعيد الحساب وتعرض المكافئ اليومي
-  document.querySelectorAll('input[name="period"]').forEach(function(r){
-    r.addEventListener('change', recalc);
-  });
 
-  // فتح المحاكي
+  // فتح المحاكي ثلاثي الأبعاد مع البيانات الحالية
   $('simBtn').addEventListener('click', function(){
     var s = window.__solar || {panels:10, watt:550, len:2.278, wid:1.134, cc:6, cr:24};
     var q = 'panels=' + s.panels + '&watt=' + s.watt + '&len=' + s.len + '&wid=' + s.wid + '&cc=' + s.cc + '&cr=' + s.cr;
     window.open('3d.html?' + q, '_blank');
   });
+
 
   /* =====================================================
      8) التشغيل
@@ -789,6 +871,7 @@ footer strong{color:var(--text)}
   }
   initIcons();
   updatePanelInfo();
+  updatePresetsLabels();
   recalc();
   initCharts();
 })();
